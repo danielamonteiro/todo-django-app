@@ -1,0 +1,35 @@
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: darkslateblue;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;    
+    background-color: darkslateblue;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: xx-large;
+}
+
+.h1 {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.tasks {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.late-task {
+    font-family: 'Courier New', Courier, monospace;
+    color: dimgray;
+    text-decoration: line-through;
+
+}
