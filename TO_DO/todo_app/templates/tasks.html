@@ -1,20 +1,18 @@
 {% extends "model-page.html" %}
-{% block content %}
-<html>
-    <body>
-        {% include "model-header.html" %}
-        <br>
-        <h1>TASKS</h1>
-        <div class="tasks">
-            {% for task in tasks %}
-                <input type="checkbox" value={{ task.task_name }}> 
-                {{ task.task_name }} - {{ task.get_task_deadline}} - {{ task.category}} <br>
-            
-            {% endfor %}
-        </div></div>
 
-        {% include "model-footer.html" %}
-        
-    </body>
-{% endblock %}
-</html>
+{% block content %}
+<br>
+<h1>TASK</h1>
+
+<form action="submit" method="POST">
+    <label>Task Name:</label>
+    <input type="number" name="id_task" value="{{ task.id_task }}" hidden>
+    <br>
+    <input type="text" name="task_name" value="{{ task.task_name }}">
+    <br>
+    <label>Description:</label>
+    <input type="text" name="description" value="{{ task.description }}">
+    <br>
+    
+
+</form>

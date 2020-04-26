@@ -16,8 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from todo_app import views
+from django.views.generic import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('tasks/', views.tasks_list)
+    path('todo/', views.tasks_list),
+    path('todo/tasks', views.task),
+    path('todo/tasks/submit', views.submit_task),
+    path('todo/tasks/delete/<int:id_task>/', views.delete_task),
+    path('', RedirectView.as_view(url='/todo/')),
+    path('login/', views.login_user),
+    path('login/submit', views.submit_login),
+    path('logout/', views.logout_user)
 ]

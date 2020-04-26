@@ -1,0 +1,38 @@
+{% extends "model-page.html" %}
+
+{% block content %}
+    <br>       
+        <div class="tasks">
+            <h1>TASKS</h1>
+            <center><form action="task/"><input type="submit" value="New Task"></form></center>
+            <table class="TasksTable">
+                <thead>
+                    <tr>
+                        <th>Task</th>
+                        <th>Deadline</th>
+                        <th>Category</th>
+                        <th>Status</th>
+                        <th>Options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for task in tasks %}
+                    <tr>
+                        <td>{{ task.task_name }}</td>
+                        <td>{{ task.get_task_deadline }}</td>
+                        <td>{{ task.category }}</td>
+                        <td>{{ task.status }}</td>
+                    
+                    <td>
+                        <form action="tasks/?id={{ task.id }}" class="edit_task"><input type="submit" value="Edit" display="inline-block"></form>
+                        <form action="tasks/delete/{{ task.id }}/" class="delete_task"><input type="submit" value="Delete" display="inline-block"></form>
+                    </td>                
+                    
+                    
+                    {% endfor %}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+{% endblock %}

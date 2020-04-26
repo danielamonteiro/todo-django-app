@@ -2,11 +2,18 @@ from django.db import models
 from django.contrib.auth.models import User
 from datetime import datetime
 
+
 class Tasks(models.Model):
+    STATUS_CHOICES = (
+    ('CO', 'Completed'),
+    ('PE', 'Pending'),
+    ('CA', 'Canceled'))
+
     task_name = models.CharField(max_length=200)
     category = models.CharField(max_length=100, default="Undefined")
     description = models.TextField(blank=True, null=True)
     deadline = models.DateField()
+    status = models.CharField(max_length=2, choices=STATUS_CHOICES, default="Pending")
     creation_date = models.DateTimeField(auto_now=True)
     task_user = models.ForeignKey(User, on_delete=models.CASCADE)
 
