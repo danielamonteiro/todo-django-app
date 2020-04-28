@@ -62,6 +62,56 @@ th {
     color: white;
 }
 
-form {
+.todo-form {
     text-align: center;
+}
+
+.task-form {
+    font-family: 'Courier New', Courier, monospace;
+    text-align: left;
+    margin: 0;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-40%, -50%);
+    font-size: xx-large;
+}
+
+.btn-tasks-save {
+    margin: auto;
+    text-align: center;
+    display: inline-block;
+    position: absolute;
+    left: 30%;
+    font-size: medium;
+
+}
+
+.btn-tasks-cancel {
+    margin: auto;
+    text-align: center;
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    font-size: medium;
+
+}
+
+.login {
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    font-size: x-large;
+}
+
+.btn-login {
+    font-size: smaller;
+}
+
+.btn-logout {
+    text-align: right;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: smaller;
+    top: 10;
+    right: 0;
+    position: fixed;
 }

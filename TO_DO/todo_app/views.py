@@ -10,6 +10,7 @@ def login_user(request):
     return render(request, 'login.html')
 
 def logout_user(request):
+    logout(request)
     return redirect('/')
 
 def submit_login(request):
@@ -21,7 +22,7 @@ def submit_login(request):
             login(request, usuario)
             return redirect('/')
         else:
-            messages.error(request, "Usuário e/ou senha inválido (s)!")
+            messages.error(request, "Wrong user name and/or password!")
 
         return redirect('/')
 
@@ -40,21 +41,26 @@ def task(request):
     if id_task:
         data['task'] = Tasks.objects.get(id=id_task)
     
-    return render(request, 'task.html', data)
+    return render(request, 'tasks.html', data)
 
 @login_required(login_url='/login/')
 def submit_task(request):
     if request.POST:
         task_name = request.POST.get('task_name')
-        cetegory = request.POST.get('category')
+        category = request.POST.get('category')
         description = request.POST.get('description')
         deadline = request.POST.get('deadline')
         status = request.POST.get('status')
-        task_user = request.POST.get('task_user')
+        task_user = request.user
         id_task = request.POST.get('id_task')
+        print("ID TASK", id_task)
         if id_task:
+            print("ID TASK", id_task)
             task = Tasks.objects.get(id=id_task)
-            if task.user_task == task_user:
+            print("TASK", task)
+            print("Task User", task.task_user)
+            print("User request", task_user)
+            if task.task_user == task_user:
                 task.task_name = task_name
                 task.category = category
                 task.description = description
@@ -78,7 +84,7 @@ def delete_task(request, id_task):
         task = Tasks.objects.get(id=id_task)
     except Exception:
         raise Http404
-    if task_user == task.user_task:
+    if task_user == task.task_user:
         task.delete()
     else:
         raise Http404

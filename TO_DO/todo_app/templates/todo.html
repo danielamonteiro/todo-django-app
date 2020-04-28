@@ -4,7 +4,7 @@
     <br>       
         <div class="tasks">
             <h1>TASKS</h1>
-            <center><form action="task/"><input type="submit" value="New Task"></form></center>
+            <form action="tasks/" class="todo-form"><input type="submit" value="New Task"></form>
             <table class="TasksTable">
                 <thead>
                     <tr>
@@ -17,20 +17,36 @@
                 </thead>
                 <tbody>
                     {% for task in tasks %}
-                    <tr>
-                        <td>{{ task.task_name }}</td>
-                        <td>{{ task.get_task_deadline }}</td>
-                        <td>{{ task.category }}</td>
-                        <td>{{ task.status }}</td>
-                    
-                    <td>
-                        <form action="tasks/?id={{ task.id }}" class="edit_task"><input type="submit" value="Edit" display="inline-block"></form>
-                        <form action="tasks/delete/{{ task.id }}/" class="delete_task"><input type="submit" value="Delete" display="inline-block"></form>
-                    </td>                
-                    
-                    
+                        {% if not get_completed_tasks %}
+                            <tr>
+                                <td style= {% if task.get_late_tasks %} 
+                                    "color:red;" 
+                                        {% endif %}>
+                                    {{ task.task_name }}
+                                </td>
+                                <td style= {% if task.get_late_tasks %} 
+                                    "color:red;" 
+                                        {% endif %}>
+                                        {{ task.get_task_deadline }}
+                                </td>
+                                <td style= {% if task.get_late_tasks %} 
+                                    "color:red;" 
+                                        {% endif %}>
+                                        {{ task.category }}
+                                </td>
+                                <td style= {% if task.get_late_tasks %} 
+                                    "color:red;" 
+                                        {% endif %}>
+                                        {{ task.status }}
+                                </td>                   
+                                <td>
+                                    <form action="tasks/?id={{ task.id }}" class="todo-form" method="POST">{% csrf_token %}<input type="submit" value="Edit" display="inline-block"></form>
+                                    <form action="tasks/delete/{{ task.id }}/" class="todo-form"><input type="submit" value="Delete" display="inline-block"></form>
+                                </td>                
+                            </tr>
+                        {% endif %}
                     {% endfor %}
-                    </tr>
+                        
                 </tbody>
             </table>
         </div>

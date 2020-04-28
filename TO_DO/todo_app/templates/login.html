@@ -1,0 +1,22 @@
+{% extends "model-page.html" %}
+
+{% block content %}
+<br>
+<h1>Login</h1>
+<div class="login">
+    <form action="submit" method="POST"> {% csrf_token %}
+        <label>Username:</label>
+        <input type="text" name="username">
+        <label>Password:</label>
+        <input type="password" name="password">
+        <button type="submit" class="btn-login">Login</button>
+    </form>
+
+    {% for message in messages %}
+            <br>
+            <strong>Error!</strong> {{ message }}
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
