@@ -3,24 +3,28 @@
 {% block content %}
 <br>
 <h1>TASK</h1>
- 
+
 <div class="task-form">
     <form action="submit" method="POST"> {% csrf_token %}
         <label>Task Name:</label>
         <input type="number" name="id_task" value="{{ task.id }}" hidden>
-        <input type="text" name="task_name" value="{{ task.task_name }}">
+        <input type="text" class="tasks-edit" name="task_name" value="{{ task.task_name }}">
         <br>
-        <label>Description:</label>
-        <textarea name="description" rows="7" cols="30" value="{{ task.description }}"></textarea>
+        <label>Description:</label><br>
+        <textarea name="description" rows="5" cols="30">{{ task.description }}</textarea>
         <br>
         <label>Category:</label>
-        <input type="text" name="category" value="{{ task.category }}">
+        <input type="text" class="tasks-edit" name="category" value="{{ task.category }}">
         <br>
         <label>Deadline:</label>
-        <input type="datetime-local" name="deadline" value="{{ task.get_data_input_task }}">
+        <input type="datetime-local" class="tasks-edit" name="deadline" value="{{ task.get_data_input_task }}">
         <br>
         <label>Status:</label>
-        <input type="text" name="status" value="{{ task.status }}">
+        <select name="status" id="status" class="tasks-edit">
+            <option value="Pending">Pending</option>
+            <option value="Completed">Completed</option>
+            <option value="Canceled">Canceled</option>
+        </select>
         <br>
         <br>
         <button type="submit" class="btn-tasks-save">Save</button>

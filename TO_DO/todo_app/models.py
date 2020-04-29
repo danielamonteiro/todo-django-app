@@ -36,8 +36,8 @@ class Tasks(models.Model):
         else:
             return False
     
-    def get_completed_tasks(self):
-        if self.status == "Completed":
+    def get_pending_tasks(self):
+        if self.status == "Pending":
             return True
         else:
             return False

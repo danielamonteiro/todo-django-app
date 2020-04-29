@@ -1,0 +1,48 @@
+{% extends "model-page.html" %}
+
+{% block content %}
+    <br>       
+        <div class="tasks">
+            <h1>COMPLETED TASKS</h1>
+            <center><div class="tasks-btn">
+                <form action="tasks/" class="todo-form"><input type="submit" value="New Task"></form>
+                <form action="/" class="todo-form"><input type="submit" value="Pending Tasks"></form>
+                <form action="canceled" class="todo-form"><input type="submit" value="Canceled Tasks"></form>
+            </div></center>
+            <table class="TasksTable">
+                <thead>
+                    <tr>
+                        <th>Task</th>
+                        <th>Deadline</th>
+                        <th>Category</th>
+                        <th>Status</th>
+                        <th>Options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for task in tasks %}
+                        <tr>
+                            <td>
+                                {{ task.task_name }}
+                            </td>
+                            <td>
+                                {{ task.get_task_deadline }}
+                            </td>
+                            <td>
+                                {{ task.category }}
+                            </td>
+                            <td>
+                                {{ task.status }}
+                            </td>                   
+                            <td>
+                                <form action="tasks/?id={{ task.id }}" class="todo-form" method="POST">{% csrf_token %}<input type="submit" value="Edit" display="inline-block"></form>
+                                <form action="tasks/delete/{{ task.id }}/" class="todo-form"><input type="submit" value="Delete" display="inline-block"></form>
+                            </td>                
+                        </tr>
+                    {% endfor %}
+                        
+                </tbody>
+            </table>
+        </div>
+
+{% endblock %}

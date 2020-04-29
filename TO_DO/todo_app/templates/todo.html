@@ -3,8 +3,12 @@
 {% block content %}
     <br>       
         <div class="tasks">
-            <h1>TASKS</h1>
-            <form action="tasks/" class="todo-form"><input type="submit" value="New Task"></form>
+            <h1>PENDING TASKS</h1>
+            <center><div class="tasks-btn">
+                <form action="tasks/" class="todo-form"><input type="submit" value="New Task"></form>
+                <form action="completed" class="todo-form"><input type="submit" value="Completed Tasks"></form>
+                <form action="canceled" class="todo-form"><input type="submit" value="Canceled Tasks"></form>
+            </div></center>
             <table class="TasksTable">
                 <thead>
                     <tr>
@@ -17,7 +21,7 @@
                 </thead>
                 <tbody>
                     {% for task in tasks %}
-                        {% if not get_completed_tasks %}
+                        {% if task.get_pending_tasks %}
                             <tr>
                                 <td style= {% if task.get_late_tasks %} 
                                     "color:red;" 

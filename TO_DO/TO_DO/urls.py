@@ -21,6 +21,8 @@ from django.views.generic import RedirectView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('todo/', views.tasks_list),
+    path('todo/completed', views.completed_tasks),
+    path('todo/canceled', views.canceled_tasks),
     path('todo/tasks/', views.task),
     path('todo/tasks/submit', views.submit_task),
     path('todo/tasks/delete/<int:id_task>/', views.delete_task),

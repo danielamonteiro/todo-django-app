@@ -35,6 +35,22 @@ def tasks_list(request):
     return render(request, 'todo.html', data)
 
 @login_required(login_url='/login/')
+def completed_tasks(request):
+    user_task = request.user
+    task = Tasks.objects.filter(status="Completed", task_user=user_task)
+    data = {'tasks': task}
+
+    return render(request, 'completed-tasks.html', data)
+
+@login_required(login_url='/login/')
+def canceled_tasks(request):
+    user_task = request.user
+    task = Tasks.objects.filter(status="Canceled", task_user=user_task)
+    data = {'tasks': task}
+
+    return render(request, 'canceled-tasks.html', data)
+
+@login_required(login_url='/login/')
 def task(request):
     id_task = request.GET.get('id')
     data = {}
@@ -53,13 +69,8 @@ def submit_task(request):
         status = request.POST.get('status')
         task_user = request.user
         id_task = request.POST.get('id_task')
-        print("ID TASK", id_task)
         if id_task:
-            print("ID TASK", id_task)
             task = Tasks.objects.get(id=id_task)
-            print("TASK", task)
-            print("Task User", task.task_user)
-            print("User request", task_user)
             if task.task_user == task_user:
                 task.task_name = task_name
                 task.category = category
